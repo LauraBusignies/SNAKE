@@ -10,6 +10,7 @@ class Game:
     def __init__(self):
         # definir si le jeu a commencer ou pas
         self.is_playing = False
+        self.pressed = {}
 
     def start(self):
         self.is_playing = True
@@ -21,5 +22,8 @@ class Game:
         pass
 
     def update(self, screen):
+        pass
+
+    def move (self):
         pass
 

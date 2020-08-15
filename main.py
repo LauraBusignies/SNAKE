@@ -59,3 +59,9 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lander
                 game.start()
+
+        elif event.type == pygame.KEYDOWN :
+            game.pressed[event.key] = True
+
+        elif event.type == pygame.KEYUP :
+            game.pressed[event.key] = False
