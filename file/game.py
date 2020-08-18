@@ -24,6 +24,7 @@ class Game:
     def update(self, screen):
         pass
 
-    def move (self):
+    def moove (self):
         pass
 
+# list_2_d = ["Y-", "X+", "X+"]
