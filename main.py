@@ -61,7 +61,17 @@ while running:
                 game.start()
 
         elif event.type == pygame.KEYDOWN :
+            list_controller = {
+                273 : "haut",
+                275 : "droite",
+                274 : "bas",
+                276 : "gauche"
+            }
+            if event.key in list_controller:
+                game.moove(list_controller[event.key])
             game.pressed[event.key] = True
+            
+
 
         elif event.type == pygame.KEYUP :
             game.pressed[event.key] = False
