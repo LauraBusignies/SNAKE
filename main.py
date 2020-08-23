@@ -69,6 +69,7 @@ while running:
             }
             if event.key in list_controller:
                 game.moove(list_controller[event.key])
+
             game.pressed[event.key] = True
             
 
