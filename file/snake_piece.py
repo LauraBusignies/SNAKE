@@ -13,4 +13,4 @@ class Snake_piece():
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.rotate = r
+        self.image = pygame.transform.rotate(self.image, r)

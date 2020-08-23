@@ -50,10 +50,13 @@ class Game:
             new_X += 40
             
         if self.snake.list_direction[len(self.snake.list_direction) - 1] == self.snake.list_direction[len(self.snake.list_direction) - 2]:
-            if self.snake.list_direction[len(self.snake.list_direction) - 1][0] == "X":
+            if self.snake.list_direction[len(self.snake.list_direction) - 2][0] == "X":
                 new_rotate = 0
             else:
-                new_rotate = 90
+                if self.snake.list_direction[len(self.snake.list_direction) - 2][1] == "+":
+                    new_rotate = 270
+                else:
+                    new_rotate = 90
         
         # supprime le dernier bloc du serpent
         del self.snake.list_body[0]
@@ -63,6 +66,7 @@ class Game:
         
         self.snake.list_body[len(self.snake.list_body) -1].image = pygame.image.load("assets/snake/middle.png")
         self.snake.list_body[len(self.snake.list_body) -1].image = pygame.transform.scale(self.snake.list_body[len(self.snake.list_body) -1].image, (40, 40))
+        self.snake.list_body[len(self.snake.list_body) -1].image = pygame.transform.rotate(self.snake.list_body[len(self.snake.list_body) -1].image, new_rotate)
         
         self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", new_rotate))
 
