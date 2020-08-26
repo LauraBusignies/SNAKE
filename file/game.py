@@ -96,6 +96,7 @@ class Game:
         return new_rotate
 
     def moove (self, event):
+        # ! si le snake veux sortir de son terrain on le bloque
         if event == "haut" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 160 or event == "bas" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 600 or event == "gauche" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 160 or event == "droite" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 840:
             pass
         else:
@@ -153,14 +154,22 @@ class Game:
 
     # list_2_d = ["Y-", "X+", "X+"]
     
+    # ! fonction pour créer les pommes
     def create_apple(self):
+        # tout les multiple de 40 succeptible d'etre choisi
         pos_possible = [160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640, 680, 720, 760, 800, 840]
         position_apple = False
         while position_apple == False:
+            # je set temporairement a True le fait qu'on ai des bonne position
             position_apple = True
+            # je choisi de manniere rng les position de ma pomme
             apple_X = pos_possible[random.randint(0, 17)]
             apple_Y = pos_possible[random.randint(0, 11)]
+            # je parcour tout les bloc du snake
             for snake_part in self.snake.list_body:
+                # si la pos de ma pomme correspond au rect d'un bloc du snake
                 if snake_part.rect.x == apple_X and snake_part.rect.y == apple_Y:
+                    # je set la position de l'apple a False de manniere a refaire une boucle jusqu'a avoir une bonne position
                     position_apple = False
+        # je rajoute ma nouvelle pomme
         self.list_apple.append(Apple(apple_X, apple_Y))
