@@ -13,7 +13,7 @@ screen = pygame.display.set_mode((1080, 720))
 
 # importer et charger le background*
 background = pygame.image.load('assets/background/background.png')
-background = pygame.transform.scale(background, (1080, 720))
+# background = pygame.transform.scale(background, (1080, 720))
 
 
 # import charger notre bouton pour lancer la partie
