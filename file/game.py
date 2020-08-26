@@ -90,52 +90,61 @@ class Game:
         return new_rotate
 
     def moove (self, event):
-        self.turn_around(event)
-        self.rotate_end()
-        if self.moove_snake :
+        if event == "haut" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 160:
+            print("ko")
+        elif event == "bas" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 600:
+            print("ko")
+        elif event == "gauche" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 160:
+            print("ko")
+        elif event == "droite" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 840:
+            print("ko")
+        else:
+            self.turn_around(event)
+            self.rotate_end()
+            if self.moove_snake :
 
-            new_Y = self.snake.list_body[len(self.snake.list_body) -1].rect.y
-            new_X = self.snake.list_body[len(self.snake.list_body) -1].rect.x
-            new_rotate = 0
+                new_Y = self.snake.list_body[len(self.snake.list_body) -1].rect.y
+                new_X = self.snake.list_body[len(self.snake.list_body) -1].rect.x
+                new_rotate = 0
 
 
 
-            # supprime le dernier bloc du serpent
-            del self.snake.list_body[0]
-            del self.snake.list_direction[0]
-            # affiche la queue au bout de notre serpent
-            self.snake.list_body[0].image = pygame.image.load("assets/snake/end.png")
-            #self.snake.list_body[0].image = pygame.transform.scale(self.snake.list_body[0].image, (40, 40))
-            self.snake.list_body[0].image = pygame.transform.rotate(self.snake.list_body[0].image, self.var_rotate_end)
-                
+                # supprime le dernier bloc du serpent
+                del self.snake.list_body[0]
+                del self.snake.list_direction[0]
+                # affiche la queue au bout de notre serpent
+                self.snake.list_body[0].image = pygame.image.load("assets/snake/end.png")
+                #self.snake.list_body[0].image = pygame.transform.scale(self.snake.list_body[0].image, (40, 40))
+                self.snake.list_body[0].image = pygame.transform.rotate(self.snake.list_body[0].image, self.var_rotate_end)
+                    
 
-            if event == "haut":
-                self.snake.list_direction.append("Y-")
-                new_Y -= 40
-                new_rotate = self.rotate_middle(new_rotate)
-                self.middle_or_turn(new_rotate)
-                self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 90))
+                if event == "haut":
+                    self.snake.list_direction.append("Y-")
+                    new_Y -= 40
+                    new_rotate = self.rotate_middle(new_rotate)
+                    self.middle_or_turn(new_rotate)
+                    self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 90))
 
-            elif event == "bas":
-                self.snake.list_direction.append("Y+")
-                new_Y += 40
-                new_rotate = self.rotate_middle(new_rotate)
-                self.middle_or_turn(new_rotate)
-                self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", -90))
+                elif event == "bas":
+                    self.snake.list_direction.append("Y+")
+                    new_Y += 40
+                    new_rotate = self.rotate_middle(new_rotate)
+                    self.middle_or_turn(new_rotate)
+                    self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", -90))
 
-            elif event == "gauche" :
-                self.snake.list_direction.append("X-")
-                new_X -= 40
-                new_rotate = self.rotate_middle(new_rotate)
-                self.middle_or_turn(new_rotate)
-                self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 180))
+                elif event == "gauche" :
+                    self.snake.list_direction.append("X-")
+                    new_X -= 40
+                    new_rotate = self.rotate_middle(new_rotate)
+                    self.middle_or_turn(new_rotate)
+                    self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 180))
 
-            else:
-                self.snake.list_direction.append("X+")
-                new_X += 40
-                new_rotate = self.rotate_middle(new_rotate)
-                self.middle_or_turn(new_rotate)
-                self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 0))
+                else:
+                    self.snake.list_direction.append("X+")
+                    new_X += 40
+                    new_rotate = self.rotate_middle(new_rotate)
+                    self.middle_or_turn(new_rotate)
+                    self.snake.list_body.append(Snake_piece(new_X, new_Y, "assets/snake/start.png", 0))
 
 
             
