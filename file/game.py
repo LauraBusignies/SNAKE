@@ -4,6 +4,7 @@ import pygame
 import random
 from file.snake import Snake
 from file.snake_piece import Snake_piece
+from file.apple import Apple
 
 # créer une classe game
 class Game:
@@ -21,6 +22,7 @@ class Game:
     def start(self):
         self.is_playing = True
         self.snake = Snake()
+        self.list_apple = []
         
     def end(self):
         self.is_playing = False
@@ -32,6 +34,10 @@ class Game:
         screen.blit(self.background, (0,0))
         for bloc in self.snake.list_body:
             screen.blit(bloc.image, bloc.rect)
+        if len(self.list_apple) == 0:
+            self.create_apple()
+        else:
+            screen.blit(self.list_apple[0].image, self.list_apple[0].rect)
 
     def turn_around(self, event):
         self.moove_snake = True 
@@ -90,14 +96,8 @@ class Game:
         return new_rotate
 
     def moove (self, event):
-        if event == "haut" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 160:
-            print("ko")
-        elif event == "bas" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 600:
-            print("ko")
-        elif event == "gauche" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 160:
-            print("ko")
-        elif event == "droite" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 840:
-            print("ko")
+        if event == "haut" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 160 or event == "bas" and self.snake.list_body[len(self.snake.list_body) - 1].rect.y == 600 or event == "gauche" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 160 or event == "droite" and self.snake.list_body[len(self.snake.list_body) - 1].rect.x == 840:
+            pass
         else:
             self.turn_around(event)
             self.rotate_end()
@@ -152,3 +152,15 @@ class Game:
 
 
     # list_2_d = ["Y-", "X+", "X+"]
+    
+    def create_apple(self):
+        pos_possible = [160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640, 680, 720, 760, 800, 840]
+        position_apple = False
+        while position_apple == False:
+            position_apple = True
+            apple_X = pos_possible[random.randint(0, 17)]
+            apple_Y = pos_possible[random.randint(0, 11)]
+            for snake_part in self.snake.list_body:
+                if snake_part.rect.x == apple_X and snake_part.rect.y == apple_Y:
+                    position_apple = False
+        self.list_apple.append(Apple(apple_X, apple_Y))
